@@ -272,7 +272,7 @@ start_pdnsd() {
 		pid_file="/var/run/pdnsd.pid";
 		run_as="nobody";
 		server_ip=127.0.0.1;
-		server_port=5335;
+		server_port=5553;
 		status_ctl=on;
 		query_method=tcp_only;
 		min_ttl=1h;
@@ -487,7 +487,7 @@ start_redir() {
 		pdnsd_enable_flag=1
 	elif [ "$ssr_dns" == "2" ]; then
 		microsocks -i 127.0.0.1 -p 10802 ssr-dns >/dev/null 2>&1 &
-		dns2socks 127.0.0.1:10802 $dnsserver:$dnsport 127.0.0.1:5335 -q >/dev/null 2>&1 &
+		dns2socks 127.0.0.1:10802 $dnsserver:$dnsport 127.0.0.1:5553 -q >/dev/null 2>&1 &
 		pdnsd_enable_flag=2
 	fi
 	if [ "$(uci_get_by_type global enable_switch)" == "1" ]; then
@@ -667,7 +667,7 @@ start() {
 					sed -i "/$line/d" /tmp/dnsmasq.ssr/gfw_list.conf
 				done
 				awk '!/^$/&&!/^#/{printf("ipset=/.%s/'"netflix"'\n",$0)}' /etc/config/netflix.list >/tmp/dnsmasq.ssr/netflix_forward.conf
-				awk '!/^$/&&!/^#/{printf("server=/.%s/'"127.0.0.1#5335"'\n",$0)}' /etc/config/netflix.list >>/tmp/dnsmasq.ssr/netflix_forward.conf
+				awk '!/^$/&&!/^#/{printf("server=/.%s/'"127.0.0.1#5553"'\n",$0)}' /etc/config/netflix.list >>/tmp/dnsmasq.ssr/netflix_forward.conf
 				ipset -N netflix hash:net 2>/dev/null
 				cat /etc/config/netflixip.list | while read nip || [ -n "$nip" ]; do
 					ipset add netflix $nip 2>/dev/null
