@@ -508,8 +508,8 @@ msgstr "删除所有订阅服务器节点"
 msgid "Severs Nodes"
 msgstr "服务器节点"
 
-msgid "Use Local DNS Service listen port 5553
-msgstr "使用本机端口为5553服务"
+msgid "Use Local DNS Service listen port 5335
+msgstr "使用本机端口为5335的DNS服务"
 
 msgid "Server Node Type"
 msgstr "服务器节点类型"
